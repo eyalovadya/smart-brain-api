@@ -13,6 +13,7 @@ services:
       POSTGRES_HOST: postgres
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      PORT: 3001
       CLARIFAI_API_KEY: f9d70547a2264d97a31db187a63a6976
     ports:
       - "3000:3000"
