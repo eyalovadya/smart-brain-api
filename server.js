@@ -9,6 +9,7 @@ const register = require("./controllers/register");
 const signin = require("./controllers/signin");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
+const { requireAuth } = require("./controllers/authorization");
 
 const db = knex({
   // connect to your own database here:
@@ -31,20 +32,21 @@ app.get("/", (req, res) => {
   // res.send(db.users);
   res.send("This is working");
 });
-app.post("/signin", signin.handleSignin(db, bcrypt));
+app.post("/signin", signin.signinAuthentication(db, bcrypt));
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
-app.get("/profile/:id", (req, res) => {
+
+app.get("/profile/:id", requireAuth, (req, res) => {
   profile.handleProfileGet(req, res, db);
 });
-app.post("/profile/:id", (req, res) => {
+app.post("/profile/:id", requireAuth, (req, res) => {
   profile.handleProfileUpdate(req, res, db);
 });
-app.put("/image", (req, res) => {
+app.put("/image", requireAuth, (req, res) => {
   image.handleImage(req, res, db);
 });
-app.post("/imageurl", (req, res) => {
+app.post("/imageurl", requireAuth, (req, res) => {
   image.handleApiCall(req, res);
 });
 
