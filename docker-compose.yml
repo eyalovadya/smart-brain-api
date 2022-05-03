@@ -7,6 +7,8 @@ services:
     command: npm start -- -L
     working_dir: /usr/src/smart-brain-api
     environment:
+      DATABASE_URL: eyal:secret@postgres:5432/smart-brain-docker
+      REDIS_URL: redis://redis:6379
       POSTGRES_USER: eyal
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: smart-brain-docker
@@ -16,7 +18,7 @@ services:
       PORT: 3001
       CLARIFAI_API_KEY: f9d70547a2264d97a31db187a63a6976
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - ./:/usr/src/smart-brain-api
 
