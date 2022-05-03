@@ -14,8 +14,10 @@ const { requireAuth } = require("./controllers/authorization");
 const db = knex({
   // connect to your own database here:
   client: "pg",
-  connection: process.env.DATABASE_URL,
-  ssl: true,
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  },
 });
 
 const app = express();
