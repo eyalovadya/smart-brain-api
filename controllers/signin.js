@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const redis = require("redis");
 
 // Setup Redis:
-console.log("redis url:", process.env.REDIS_URL);
 const redisClient = redis.createClient({ url: process.env.REDIS_URL });
 
 const handleSignin = (db, bcrypt, req, res) => {
@@ -24,7 +23,7 @@ const handleSignin = (db, bcrypt, req, res) => {
           .then((user) => user[0])
           .catch((err) => Promise.reject("unable to get user"));
       } else {
-        Promise.reject("wrong credentials");
+        return Promise.reject("wrong credentials");
       }
     })
     .catch((err) => Promise.reject("wrong credentials"));
@@ -80,4 +79,5 @@ const signinAuthentication = (db, bcrypt) => (req, res) => {
 module.exports = {
   signinAuthentication,
   redisClient,
+  createSession,
 };

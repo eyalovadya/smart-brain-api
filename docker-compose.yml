@@ -7,7 +7,7 @@ services:
     command: npm start -- -L
     working_dir: /usr/src/smart-brain-api
     environment:
-      DATABASE_URL: eyal:secret@postgres:5432/smart-brain-docker
+      DATABASE_URL: postgres://eyal:secret@postgres:5432/smart-brain-docker
       REDIS_URL: redis://redis:6379
       POSTGRES_USER: eyal
       POSTGRES_PASSWORD: secret
